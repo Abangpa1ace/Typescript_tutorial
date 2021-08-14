@@ -7,4 +7,4 @@ type Props = {
   handleAddToCart: (item: CartItemType) => void;
 };
 
-const Item: R
+const Item: React.FC
