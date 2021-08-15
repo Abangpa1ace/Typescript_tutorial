@@ -29,8 +29,10 @@ function App() {
     "products",
     getProducts
   );
-  console.log(data);
-  const getTotalItems = () => null;
+
+  const getTotalItems = (items: CartItemType[]) => {
+    return items.reduce((acc: number, cur) => acc + cur.amount, 0);
+  };
   const handleAddToCart = (item: CartItemType) => null;
   const handleRemoveFromCart = () => null;
 
@@ -42,6 +44,11 @@ function App() {
       <Drawer anchor='right' open={isCartOpen} onClose={() => setIsCartOpen(false)}>
         Cart goes here
       </Drawer>
+      <StyledButton onClick={() => setIsCartOpen(true)}>
+        <Badge badgeContent={getTotalItems(cart)} color="error">
+          <AddShoppingCartIcon />
+        </Badge>
+      </StyledButton>
       <Grid container spacing={3}>
         {data?.map(item => (<Grid item key={item.id} xs={12} sm={4}>
           <Item item={item} handleAddToCart={handleAddToCart} />
