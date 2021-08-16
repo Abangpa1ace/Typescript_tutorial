@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import Item from './components/item';
+import Item from './components/Item';
+import Cart from './components/Cart';
 import { Drawer, LinearProgress, Grid, Badge } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
@@ -30,11 +31,35 @@ function App() {
     getProducts
   );
 
-  const getTotalItems = (items: CartItemType[]) => {
+  const getTotalItems = (items: CartItemType[]): number => {
     return items.reduce((acc: number, cur) => acc + cur.amount, 0);
   };
-  const handleAddToCart = (item: CartItemType) => null;
-  const handleRemoveFromCart = () => null;
+  const handleAddToCart = (newItem: CartItemType) => {
+    setCart(prev => {
+      const isExisting = prev.find(item => item.id === newItem.id);
+      if (isExisting) {
+        return prev.map(item => (
+          item.id === newItem.id 
+          ? {...item, amount: item.amount + 1 }
+          : item
+        ))
+      }
+      return [...prev, {...newItem, amount: 1}]
+    })
+  };
+  const handleRemoveFromCart = (id: number) => {
+    setCart(prev => (
+      prev.reduce((list, item) => {
+        if (id === item.id) {
+          if (item.amount === 1) return list;
+          return [...list, {...item, amount: item.amount - 1}]
+        }
+        else {
+          return [...list, item]
+        }
+      }, [] as CartItemType[])
+    ))
+  }
 
   if (isLoading) return <LinearProgress />;
   if (error) return <div>Something you want isn't here...</div>;
@@ -42,7 +67,7 @@ function App() {
   return (
     <Wrapper>
       <Drawer anchor='right' open={isCartOpen} onClose={() => setIsCartOpen(false)}>
-        Cart goes here
+        <Cart cartItems={cart} addToCart={handleAddToCart} removeFromCart={handleRemoveFromCart} />
       </Drawer>
       <StyledButton onClick={() => setIsCartOpen(true)}>
         <Badge badgeContent={getTotalItems(cart)} color="error">
