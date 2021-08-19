@@ -1,5 +1,5 @@
 import React from 'react';
-import QuesCard from './components/QuesCard';
+import QuesCard from './components/TodoItem';
 
 function App() {
   const getQuiz = async () => {
