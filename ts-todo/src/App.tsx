@@ -1,29 +1,13 @@
 import React from 'react';
-import QuesCard from './components/TodoItem';
+import TodoItem from './components/TodoItem';
+import { TodoItemType } from './types';
+import { TODOS } from './data';
 
 function App() {
-  const getQuiz = async () => {
-
-  }
-
-  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
-
-  }
-
-  const nextQuestion = () => {
-
-  }
-
+  
   return (
     <div className="App">
-      <h1>React Quiz</h1>
-      <button className="start" onClick={getQuiz}>Start</button>
-      <p className="score">Score: </p>
-      <p className="loader">
-        Loading Questions...
-      </p>
-      <QuesCard />
-      <button className="next" onClick={nextQuestion}>Next Question</button>
+      <TodoItem todo={{text: 'hi', done: false}} />
     </div>
 
   );

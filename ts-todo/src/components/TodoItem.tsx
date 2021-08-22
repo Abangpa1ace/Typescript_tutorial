@@ -1,19 +1,17 @@
 import React from "react";
+import { TodoItemType } from '../types';
 
 interface Props {
-  todo: {
-    text: string;
-    complete: boolean;
-  };
+  todo: TodoItemType;
 }
 
 const TodoItem: React.FC<Props> = ({ todo }) => {
   return (
     <li>
       <label>
-        <input type="checkbox" />
-        {todo.text}
-      </label>
+        <input type="checkbox" checked={todo.done} />
+          {todo.text}
+        </label>
     </li>
   );
 };
