@@ -1,16 +1,20 @@
-import React from 'react';
-import TodoItem from './components/TodoItem';
-import { TodoItemType } from './types';
-import { TODOS } from './data';
+import React, { useEffect } from "react";
+import TodoItem from "./components/TodoItem";
+import { TODOS } from "./data";
 
-function App() {
-  
+const App: React.FC = () => {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    setTodos(TODOS);
+  }, []);
+
   return (
     <div className="App">
-      <TodoItem todo={{text: 'hi', done: false}} />
+      <TodoItem todo={TODOS[0]} />
+      <TodoItem todo={TODOS[1]} />
     </div>
-
   );
-}
+};
 
 export default App;
