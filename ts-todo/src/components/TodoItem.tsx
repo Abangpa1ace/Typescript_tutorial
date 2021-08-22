@@ -1,14 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-interface Props {
-  todo: TodoItemType;
-}
 
-const TodoItem: React.FC<Props> = ({ todo }) => {
+type Props = {
+  todo: TodoItemType;
+  toggleTodo: ToggleTodo;
+};
+
+const TodoItem: React.FC<Props> = ({ todo, toggleTodo }) => {
   return (
     <Todoitem>
       <label className={todo.done ? "done" : ""}>
-        <input type="checkbox" checked={todo.done} />
+        <input
+          type="checkbox"
+          checked={todo.done}
+          onChange={() => toggleTodo(todo.id)}
+        />
         {todo.text}
       </label>
     </Todoitem>

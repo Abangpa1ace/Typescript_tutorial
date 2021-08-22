@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import TodoItem from "./components/TodoItem";
+import TodoList from "components/TodoList";
+import React, { useState, useEffect } from "react";
 import { TODOS } from "./data";
 
 const App: React.FC = () => {
@@ -9,10 +9,16 @@ const App: React.FC = () => {
     setTodos(TODOS);
   }, []);
 
+  const toggleTodo: ToggleTodo = (id) => {
+    const newTodos = todos.map((todo: TodoItemType) =>
+      todo.id === id ? { ...todo, done: !todo.done } : todo
+    );
+    setTodos(newTodos);
+  };
+
   return (
     <div className="App">
-      <TodoItem todo={TODOS[0]} />
-      <TodoItem todo={TODOS[1]} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
     </div>
   );
 };

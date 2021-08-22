@@ -3,4 +3,6 @@ declare global {
     text: string;
     done: boolean;
   }
+
+  type ToggleTodo = (id: number) => void;
 }
