@@ -5,4 +5,5 @@ declare global {
   }
 
   type ToggleTodo = (id: number) => void;
+  type AddTodo = (text: string) => void;
 }

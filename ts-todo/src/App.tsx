@@ -1,5 +1,6 @@
-import TodoList from "components/TodoList";
 import React, { useState, useEffect } from "react";
+import TodoList from "components/TodoList";
+import AddTodoForm from 'components/AddTodoForm';
 import { TODOS } from "./data";
 
 const App: React.FC = () => {
@@ -16,9 +17,12 @@ const App: React.FC = () => {
     setTodos(newTodos);
   };
 
+  const addTodo: 
+
   return (
     <div className="App">
       <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <AddTodoForm />
     </div>
   );
 };
