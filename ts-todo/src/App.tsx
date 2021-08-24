@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "components/TodoList";
-import AddTodoForm from 'components/AddTodoForm';
+import AddTodoForm from "components/AddTodoForm";
 import { TODOS } from "./data";
 
 const App: React.FC = () => {
@@ -17,12 +17,15 @@ const App: React.FC = () => {
     setTodos(newTodos);
   };
 
-  const addTodo: 
+  const addTodo: AddTodo = (text) => {
+    const newTodo = { id: todos.length + 1, text, complete: false };
+    setTodos([...todos, newTodo]);
+  };
 
   return (
     <div className="App">
       <TodoList todos={todos} toggleTodo={toggleTodo} />
-      <AddTodoForm />
+      <AddTodoForm addTodo={addTodo} />
     </div>
   );
 };

@@ -1,6 +1,10 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 
-const AddTodoForm: React.FC = (props) => {
+type Props = {
+  addTodo: AddTodo;
+};
+
+const AddTodoForm: React.FC<Props> = ({ addTodo }) => {
   const [newTodo, setNewTodo] = useState("");
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -8,12 +12,15 @@ const AddTodoForm: React.FC = (props) => {
   };
   const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    
-  }
+    addTodo(newTodo);
+    setNewTodo("");
+  };
   return (
     <form>
       <input type="text" value={newTodo} onChange={handleInput} />
-      <button type="submit">Add Todo</button>
+      <button type="submit" onClick={handleSubmit}>
+        Add Todo
+      </button>
     </form>
   );
 };
